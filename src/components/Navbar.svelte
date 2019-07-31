@@ -3,38 +3,36 @@
 	import {link, push, pop} from 'svelte-spa-router'
 
 	function handleSearch(e) {
-		    if (e.keyCode == 13) {
-				let type, rest
-				let query = e.target.value
+		if (e.keyCode == 13) {
+			let type, rest
+			let query = e.target.value
 
-				if (!query) {
-						push(`/rtfm`)
-						console.log('No Query')
-					return
-				}
-
-				[type] = query.split(':')
-				rest = query.slice(2)
-
-				switch (type) {
-					case 'u':
-						console.log('Username', rest)
-						push(`/username/${rest}`)
-						break;
-					case 'p':
-						console.log('Password', rest)
-						push(`/password/${rest}`)
-						break;
-					case 'd':
-						console.log('Domain', rest)
-						push(`/domain/${rest}`)
-						break;
-					default:
-						push(`/rtfm`)
-						console.log('Not Found')
-				}
-
+			if (!query) {
+				push(`/rtfm`)
+				return
 			}
+
+			[type] = query.split(':')
+			rest = query.slice(2)
+
+			switch (type) {
+				case 'u':
+					push(`/username/${rest}`)
+					break;
+				case 'p':
+					push(`/password/${rest}`)
+					break;
+				case 'd':
+					push(`/domain/${rest}`)
+					break;
+				case 'e':
+					push(`/email/${rest}`)
+					break;
+				default:
+					push(`/rtfm`)
+			}
+
+		}
 	}
 </script>
 

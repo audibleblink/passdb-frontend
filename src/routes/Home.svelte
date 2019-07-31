@@ -16,6 +16,7 @@ pre { display: inline; }
 			<li>Username <span><pre>   u:$term</pre></span></li>
 			<li>Password <span><pre>   p:$term</pre></span></li>
 			<li>Domain   <span><pre>   d:$term</pre></span></li>
+			<li>Email    <span><pre>   e:$term</pre></span></li>
 		</ul>
 		</div>
 	</div>
