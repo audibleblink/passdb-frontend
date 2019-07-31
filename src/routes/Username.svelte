@@ -3,6 +3,7 @@
 
 	import Results from '../components/Results.svelte'
 	import ResultHeader from '../components/ResultHeader.svelte'
+	import Spinner from '../components/Spinner.svelte'
 
 	async function fetchByUsername(name) {
 		const res = await fetch(`http://localhost:4567/usernames/${name}`)
@@ -25,7 +26,7 @@
 <div class="container">
 	<ResultHeader tableName={params.name} />
 	{#await fetchByUsername(params.name)}
-		<p>...waiting</p>
+		<Spinner />
 	{:then results}
 		<!-- {@debug results} -->
 		<Results {results} />

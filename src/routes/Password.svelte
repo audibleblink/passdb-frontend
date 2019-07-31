@@ -3,6 +3,7 @@
 
 	import Results from '../components/Results.svelte'
 	import ResultHeader from '../components/ResultHeader.svelte'
+	import Spinner from '../components/Spinner.svelte'
 
 	async function fetchByPassword(password) {
 		const res = await fetch(`http://localhost:4567/passwords/${password}`)
@@ -22,7 +23,7 @@
 <div class="container">
 	<ResultHeader tableName={params.password} />
 	{#await fetchByPassword(params.password)}
-		<p>...waiting</p>
+		<Spinner />
 	{:then results}
 		<!-- {@debug results} -->
 		<Results {results} />
