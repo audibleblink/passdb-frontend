@@ -17,18 +17,13 @@
 	}
 </script>
 
-<style>
-</style>
-
 <div class="container">
 	<ResultHeader tableName={params.domain} />
 	{#await fetchByDomain(params.domain)}
 		<Spinner />
 	{:then results}
-		<!-- {@debug results} -->
 		<Results {results} />
 	{:catch error}
 		<p style="color: red">{error.message}</p>
 	{/await}
 </div>
-

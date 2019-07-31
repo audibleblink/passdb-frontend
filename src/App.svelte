@@ -8,9 +8,6 @@
 	import routes from './routes.js'
 </script>
 
-<style>
-</style>
-
 <body>
 <Navbar />
 <Router {routes}/>

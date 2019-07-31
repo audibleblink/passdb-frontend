@@ -1,11 +1,7 @@
 <script>
 	export let result
-
 	import {link, push, pop} from 'svelte-spa-router'
 </script>
-
-<style>
-</style>
 
 <tr>
 	<td> <a href="/username/{result.username}" use:link> {result.username} </a></td>

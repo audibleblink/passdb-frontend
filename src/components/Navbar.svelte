@@ -1,5 +1,4 @@
 <script>
-	// import Router from 'svelte-spa-router'
 	import {link, push, pop} from 'svelte-spa-router'
 
 	function handleSearch(e) {
@@ -37,9 +36,7 @@
 </script>
 
 <style>
-	.input {
-		color: white;
-	}
+	.input { color: white; }
 </style>
 
 <nav class="blue-grey darken-1 z-depth-3">

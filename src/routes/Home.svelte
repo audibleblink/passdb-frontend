@@ -1,14 +1,9 @@
-<script>
-
-</script>
-
 <style>
-pre { display: inline; }
+	pre { display: inline; }
 </style>
 
 
 <div class="container">
-
 	<div class="row">
 		<h4> How to Search </h4>
 		<div class="card-panel">

@@ -15,20 +15,13 @@
 			return text
 		}
 	}
-
 </script>
-
-
-<style>
-</style>
-
 
 <div class="container">
 	<ResultHeader tableName={params.name} />
 	{#await fetchByUsername(params.name)}
 		<Spinner />
 	{:then results}
-		<!-- {@debug results} -->
 		<Results {results} />
 	{:catch error}
 		<p style="color: red">{error.message}</p>

@@ -17,15 +17,11 @@
 	}
 </script>
 
-<style>
-</style>
-
 <div class="container">
 	<ResultHeader tableName={params.password} />
 	{#await fetchByPassword(params.password)}
 		<Spinner />
 	{:then results}
-		<!-- {@debug results} -->
 		<Results {results} />
 	{:catch error}
 		<p style="color: red">{error.message}</p>
