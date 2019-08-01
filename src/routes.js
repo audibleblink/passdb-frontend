@@ -11,8 +11,8 @@ const routes = {
     '/username/:name': Username,
     '/domain/:domain': Domain,
     '/email/:email': Email,
-    // Catch-all
     '*': NotFound,
 }
+
 
 export default routes

@@ -4,9 +4,10 @@
 	import Results from '../components/Results.svelte'
 	import ResultHeader from '../components/ResultHeader.svelte'
 	import Spinner from '../components/Spinner.svelte'
+	import apiServer from '../host.js'
 
 	async function fetchByDomain(domain) {
-		const res = await fetch(`http://localhost:4567/domains/${domain}`)
+		const res = await fetch(`${apiServer}/domains/${domain}`)
 		const text = await res.json()
 		// debugger
 		if (res.ok) {

@@ -4,9 +4,10 @@
 	import Results from '../components/Results.svelte'
 	import ResultHeader from '../components/ResultHeader.svelte'
 	import Spinner from '../components/Spinner.svelte'
+	import apiServer from '../host.js'
 
 	async function fetchByEmail(email) {
-		const res = await fetch(`http://localhost:4567/emails/${email}`)
+		const res = await fetch(`${apiServer}/emails/${email}`)
 		const text = await res.json()
 		if (res.ok) {
 			return text

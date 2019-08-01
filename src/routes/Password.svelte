@@ -4,9 +4,10 @@
 	import Results from '../components/Results.svelte'
 	import ResultHeader from '../components/ResultHeader.svelte'
 	import Spinner from '../components/Spinner.svelte'
+	import apiServer from '../host.js'
 
 	async function fetchByPassword(password) {
-		const res = await fetch(`http://localhost:4567/passwords/${password}`)
+		const res = await fetch(`${apiServer}/passwords/${password}`)
 		const text = await res.json()
 		// debugger
 		if (res.ok) {

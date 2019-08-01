@@ -4,11 +4,11 @@
 	import Results from '../components/Results.svelte'
 	import ResultHeader from '../components/ResultHeader.svelte'
 	import Spinner from '../components/Spinner.svelte'
+	import apiServer from '../host.js'
 
 	async function fetchByUsername(name) {
-		const res = await fetch(`http://localhost:4567/usernames/${name}`)
+		const res = await fetch(`${apiServer}/usernames/${name}`)
 		const text = await res.json()
-		// debugger
 		if (res.ok) {
 			return text
 		} else {
