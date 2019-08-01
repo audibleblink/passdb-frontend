@@ -1,5 +1,6 @@
 <script>
 	export let query
+	query = query.split("?")[0]
 </script>
 
 <style>

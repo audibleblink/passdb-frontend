@@ -1,9 +1,10 @@
 <script>
 	export let params = {}
 
+	import {querystring} from 'svelte-spa-router'
 	import Fetcher from '../components/Fetcher.svelte'
-	let endpoint = `/emails/${params.email}`
 
+	$: endpoint = `/emails/${params.email}?${$querystring}`
 </script>
 
 <div class="container">

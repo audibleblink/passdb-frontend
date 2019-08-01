@@ -1,6 +1,6 @@
 <script>
 	export let result
-	import {link, push, pop} from 'svelte-spa-router'
+	import {link} from 'svelte-spa-router'
 </script>
 
 <tr>

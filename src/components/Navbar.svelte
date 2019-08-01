@@ -42,10 +42,10 @@
 <nav class="blue-grey darken-1 z-depth-3">
 	<div class="container">
 		<div class="nav-wrapper">
-			<a href="/" use:link>
+			<a class="col s3 left" href="/" use:link>
 				<span class="brand-logo">PassDB Search</span>
 			</a>
-			<ul id="nav-mobile" class="right hide-on-med-and-down">
+			<ul id="nav-mobile" class="right col s6">
 				<li>
 					<input placeholder="Search" type="text" class="white-text" on:keydown={handleSearch}/>
 				</li>
