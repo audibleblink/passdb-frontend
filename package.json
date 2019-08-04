@@ -12,7 +12,6 @@
     "svelte": "^3.0.0"
   },
   "dependencies": {
-    "materialize-css": "^1.0.0",
     "rollup-plugin-css-only": "^1.0.0",
     "sirv-cli": "^0.4.4",
     "svelte-spa-router": "^1.1.3"
