@@ -1,20 +1,25 @@
 <script>
-  export let endpoint;
+	export let endpoint
 
-  import Results from "./Results.svelte";
-  import ResultHeader from "./ResultHeader.svelte";
-  import Spinner from "./Spinner.svelte";
-  import apiServer from "../host.js";
-  let query = endpoint.split("/")[2];
+	import { location } from "svelte-spa-router"
 
-  async function apiGet() {
-    const res = await fetch(`${apiServer}${endpoint}`);
-    const text = await res.json();
-    return text;
-  }
+	import Results from "./Results.svelte"
+	import Spinner from "./Spinner.svelte"
+	import apiServer from "../host.js"
+
+	async function apiGet() {
+		const res = await fetch(`${apiServer}${endpoint}`)
+		const text = await res.json()
+		return text
+	}
 </script>
 
-<ResultHeader {query} />
+<div class="row">
+	<div class="col s12 center-align">
+		<h4 class>results for {$location.split("/")[2]}</h4>
+	</div>
+</div>
+
 {#await apiGet()}
 <Spinner />
 {:then results}

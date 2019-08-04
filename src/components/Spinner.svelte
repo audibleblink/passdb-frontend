@@ -1,3 +1,3 @@
 <div class="progress">
-  <div class="indeterminate"></div>
+	<div class="indeterminate"></div>
 </div>

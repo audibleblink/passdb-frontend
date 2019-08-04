@@ -1,3 +1,2 @@
-const apiServer = 'http://localhost:4567'
+const apiServer = "http://localhost:4567"
 export default apiServer
-

@@ -1,18 +1,17 @@
-import Home from './routes/Home.svelte'
-import Password from './routes/Password.svelte'
-import Username from './routes/Username.svelte'
-import Domain from './routes/Domain.svelte'
-import Email from './routes/Email.svelte'
-import NotFound from './routes/NotFound.svelte'
+import Home from "./routes/Home.svelte"
+import Password from "./routes/Password.svelte"
+import Username from "./routes/Username.svelte"
+import Domain from "./routes/Domain.svelte"
+import Email from "./routes/Email.svelte"
+import NotFound from "./routes/NotFound.svelte"
 
 const routes = {
-    '/': Home,
-    '/password/:password': Password,
-    '/username/:name': Username,
-    '/domain/:domain': Domain,
-    '/email/:email': Email,
-    '*': NotFound,
+	"/": Home,
+	"/password/:password": Password,
+	"/username/:name": Username,
+	"/domain/:domain": Domain,
+	"/email/:email": Email,
+	"*": NotFound,
 }
-
 
 export default routes
