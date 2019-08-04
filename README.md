@@ -7,6 +7,7 @@ the results page, users may pivot around on any clickble piece of information.
 This is a fully decoupled frontend single-page app which creates API calls to `http://localhost:4567`
 
 ## Get started
+
 Install the dependencies...
 
 ```bash
