@@ -1,7 +1,6 @@
 <script>
 	export let page
-	import {link, push, pop} from 'svelte-spa-router'
-	import {location} from 'svelte-spa-router'
+	import {link, location} from 'svelte-spa-router'
 
 </script>
 
@@ -22,7 +21,7 @@
 	{/if}
 
 	<li class="active">
-		<a href="#!"> Page {page} </a>
+		<a href="#!"> {page} </a>
 	</li>
 
 
