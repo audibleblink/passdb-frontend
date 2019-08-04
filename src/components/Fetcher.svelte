@@ -7,8 +7,8 @@
 	import Spinner from "./Spinner.svelte"
 	import apiServer from "../host.js"
 
-	async function apiGet() {
-		const res = await fetch(`${apiServer}${endpoint}`)
+	async function apiGet(q) {
+		const res = await fetch(`${apiServer}${q}`)
 		const text = await res.json()
 		return text
 	}
@@ -20,7 +20,7 @@
 	</div>
 </div>
 
-{#await apiGet()}
+{#await apiGet(endpoint)}
 <Spinner />
 {:then results}
 <Results {results} />
