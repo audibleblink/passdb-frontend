@@ -1,6 +1,6 @@
 # passdb-frontend
 
-Connects with the [passdb-backend](https://github.com/audibleblink/passdb-frontend) which serves an API for searching through a self-seeded password dump
+Connects with the [passdb-backend](https://github.com/audibleblink/passdb-backend) which serves an API for searching through a self-seeded password dump
 database. Users of the app are able to search by `username`, `password`, `domain`, or `email`. From
 the results page, users may pivot around on any clickble piece of information.
 
