@@ -3,10 +3,13 @@
 
 	import { querystring } from "svelte-spa-router"
 	import Fetcher from "../components/Fetcher.svelte"
+	import HIBP from "../components/HIBP.svelte"
 
-	$: endpoint = `/emails/${params.email}?${$querystring}`
+	$: email = params.email
+	$: endpoint = `/emails/${email}?${$querystring}`
 </script>
 
 <div class="container">
 	<Fetcher {endpoint} />
+	<HIBP {email} />
 </div>

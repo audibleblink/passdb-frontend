@@ -12,6 +12,7 @@
 		const text = await res.json()
 		return text
 	}
+
 </script>
 
 <div class="row">
