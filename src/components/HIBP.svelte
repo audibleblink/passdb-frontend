@@ -11,6 +11,31 @@
 	}
 </script>
 
+<style>
+.header {
+	font-weight: 800;
+	padding: 0.5em;
+}
+
+.desc {
+	font-size: 1.5em
+}
+
+img {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	object-fit: cover;
+	-webkit-filter: drop-shadow(5px 5px 5px #ccc);
+	filter: drop-shadow(5px 5px 5px #ccc);
+
+}
+
+li .row {
+	margin: 0px;
+}
+</style>
+
 {#await apiGet(`/breaches/${email}`)}
 <Spinner />
 
@@ -21,27 +46,43 @@
 	</div>
 </div>
 
-<table>
-	<thead>
-		<tr>
-			<th>Name</th>
-			<th>Domain</th>
-			<th>Date</th>
-			<th>Count</th>
-		</tr>
-	</thead>
 
-	<tbody>
-		{#each results as breach}
-		<tr>
-			<td> {breach.Title} </td>
-			<td> {breach.Domain} </td>
-			<td> {breach.Date} </td>
-			<td> {Number(breach.Count).toLocaleString() } </td>
-		</tr>
-		{/each}
-	</tbody>
-</table>
+
+<ul class="collapsible">
+	<li>
+		<div class="row center-align header">
+			<div class="col s3 left-align">Name</div>
+			<div class="col s3">Domain</div>
+			<div class="col s3">Date</div>
+			<div class="col s3">Count</div>
+		</div>
+	</li>
+
+	<hr/>
+
+	{#each results as breach}
+	<li>
+		<div class="collapsible-header row center-align">
+			<div class="col s3 left-align"> {breach.Title} </div>
+			<div class="col s3"> {breach.Domain} </div>
+			<div class="col s3"> {breach.Date} </div>
+			<div class="col s3"> {Number(breach.Count).toLocaleString() } </div>
+		</div>
+
+		<div class="collapsible-body row">
+			<div class="col s3" >
+				<img alt={breach.Title} src={breach.LogoPath} />
+			</div>
+				<div class="col s9 desc"> {@html breach.Description} </div>
+		</div>
+	</li>
+	{/each}
+</ul>
+
+
+<script>
+	M.AutoInit()
+</script>
 
 {:catch error}
 <p style="color: red">{error.message}</p>
