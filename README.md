@@ -8,6 +8,11 @@ This is a fully decoupled frontend single-page app which creates API calls to `h
 
 ![demo animation](./docs/demo.gif)
 
+
+Searching for a specific email will show HIBP breach information.
+
+![hibp data](https://i.imgur.com/6l5zCut.png)
+
 ## Get started
 
 Install the dependencies...

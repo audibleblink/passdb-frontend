@@ -18,7 +18,7 @@
 }
 
 .desc {
-	font-size: 1.5em
+	font-size: 1.2em
 }
 
 img {
@@ -28,7 +28,6 @@ img {
 	object-fit: cover;
 	-webkit-filter: drop-shadow(5px 5px 5px #ccc);
 	filter: drop-shadow(5px 5px 5px #ccc);
-
 }
 
 li .row {
