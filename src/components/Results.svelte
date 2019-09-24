@@ -5,12 +5,21 @@
 	import Result from "./Result.svelte"
 	import Pager from "./Pager.svelte"
 
-	$: page = parseInt($querystring.split("=")[1]) || 1
+	let qParams = $querystring.split("&")
+	let params = qParams.reduce((memo, i) => {
+		let [key, val] = i.split("=")
+		memo[key] = val
+		return memo
+	}, {})
+	params.page = parseInt(params.page)
+	params.per_page = parseInt(params.per_page)
+
+	$: page = parseInt(params.page) || 1
 </script>
 
 <style></style>
 
-<Pager {page} />
+<Pager {params} />
 <table>
 	<thead>
 		<tr>
