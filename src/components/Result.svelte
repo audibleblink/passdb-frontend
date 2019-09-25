@@ -16,14 +16,17 @@
 
 <tr>
 	<td class="valign-wrapper row clip">
+
+		{ #if ! $location.match("/email/")}
+			<a class="clip-left" href="/email/{result.username}@{result.domain}" use:link>
+				<i class="col s1 material-icons">info</i>
+			</a>
+		{:else}
+			<a class="clip-left" href="/email/{result.username}@{result.domain}" use:link>
+			</a>
+		{ /if }
+
 		<a class ="col s10 clip-left" href="/username/{result.username}" use:link> {result.username} </a>
-
-	{ #if ! $location.match("/email/")}
-		<a class="" href="/email/{result.username}@{result.domain}" use:link>
-			<i class="col s1 material-icons">email</i>
-		</a>
-	{ /if }
-
 	</td>
 	<td>
 		<a href="/domain/{result.domain}" use:link> {result.domain} </a>

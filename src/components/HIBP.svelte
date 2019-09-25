@@ -62,6 +62,7 @@ li .row {
 	{#each results as breach}
 	<li>
 		<div class="collapsible-header row center-align">
+			<i class="col s1 material-icons">info</i>
 			<div class="col s3 left-align"> {breach.Title} </div>
 			<div class="col s3"> {breach.Domain} </div>
 			<div class="col s3"> {breach.Date} </div>
