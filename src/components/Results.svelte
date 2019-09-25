@@ -11,10 +11,20 @@
 		memo[key] = val
 		return memo
 	}, {})
-	params.page = parseInt(params.page)
-	params.per_page = parseInt(params.per_page)
 
-	$: page = parseInt(params.page) || 1
+	if (params.page) {
+		params.page = parseInt(params.page)
+	} else {
+		params.page = 1
+	}
+
+	if (params.per_page) {
+		params.per_page = parseInt(params.per_page)
+	} else {
+		params.per_page = 50
+	}
+
+	$: page = parseInt(params.page)
 </script>
 
 <style></style>
