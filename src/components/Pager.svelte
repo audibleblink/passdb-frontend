@@ -19,7 +19,7 @@
 
 			{#if params.page === 1 || params.page == undefined}
 			<li class="disabled">
-				<a><i class="material-icons">chevron_left</i></a>
+				<a href="null" onclick="return false"><i class="material-icons">chevron_left </i></a>
 			</li>
 
 			{:else}
@@ -31,12 +31,12 @@
 			{/if}
 
 			<li class="active">
-				<a href="#!"> {params.page} </a>
+				<a href="null" onclick="return false"> {params.page} </a>
 			</li>
 
 			{#if params.page == undefined}
 			<li class="disabled">
-				<a><i class="material-icons">chevron_right </i></a>
+				<a href="null" onclick="return false"><i class="material-icons">chevron_right </i></a>
 			</li>
 			{:else}
 			<li class="waves-effect">

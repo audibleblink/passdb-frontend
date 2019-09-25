@@ -1,7 +1,7 @@
 <script>
 	export let results
 
-	import { querystring } from "svelte-spa-router"
+	import { location, querystring } from "svelte-spa-router"
 	import Result from "./Result.svelte"
 	import Pager from "./Pager.svelte"
 
@@ -29,7 +29,10 @@
 
 <style></style>
 
-<Pager {params} />
+{ #if !$location.match("/email/")}
+	<Pager {params} />
+{ /if }
+
 <table>
 	<thead>
 		<tr>
