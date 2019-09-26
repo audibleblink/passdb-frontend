@@ -1,5 +1,6 @@
 <script>
 	import { link, push, pop } from "svelte-spa-router"
+	import HostSetter from "./HostSetter.svelte"
 
 	function handleSearch(e) {
 		if (e.keyCode == 13) {
@@ -32,21 +33,41 @@
 			}
 		}
 	}
+
+	document.addEventListener('DOMContentLoaded', function() {
+		let options = {
+			"alignment": "right", 
+			"constrainWidth": false,
+			"coverTrigger": false,
+			"hove": true,
+			"closeOnClick": false
+		}
+		var elems = document.querySelectorAll('.dropdown-trigger');
+		var instances = M.Dropdown.init(elems, options);
+	});
+
 </script>
 
 <style>
 	.input {
 		color: white;
 	}
+
+	a i.settings {
+		margin-top: -0.55em;
+	}
 </style>
 
 <nav class="blue-grey darken-1 z-depth-3">
+
 	<div class="container">
-		<div class="nav-wrapper">
-			<a class="col s3 left" href="/" use:link>
-				<span class="brand-logo">PassDB Search</span>
+
+		<div class="row nav-wrapper">
+			<a class="col s3" href="/" use:link>
+				<div class="brand-logo">PassDB Search</div>
 			</a>
-			<ul id="nav-mobile" class="right col s6">
+
+			<ul id="nav-mobile" class="col s3 offset-s8">
 				<li>
 					<input
 						placeholder="Search"
@@ -56,6 +77,18 @@
 					/>
 				</li>
 			</ul>
+
+			<span class="col s1">
+				<!-- Dropdown Trigger -->
+				<a class="dropdown-trigger btn" href="#" data-target="api-host">
+					<i class="material-icons settings">settings</i>
+				</a>
+
+				<!-- Dropdown Structure -->
+				<div id="api-host" class="dropdown-content">
+					<HostSetter/>
+				</div>
+			</span>
 		</div>
 	</div>
 </nav>

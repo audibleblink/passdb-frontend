@@ -2,7 +2,8 @@
 	export let email
 
 	import Spinner from "./Spinner.svelte"
-	import apiServer from "../host.js"
+
+	let apiServer = localStorage.getItem("host")
 
 	async function apiGet(q) {
 		const res = await fetch(`${apiServer}${q}`)
