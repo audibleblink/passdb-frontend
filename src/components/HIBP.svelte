@@ -37,7 +37,7 @@ li .row {
 </style>
 
 {#await apiGet(`/breaches/${email}`)}
-<Spinner />
+<Spinner type="circle" />
 
 {:then results}
 <div class="row">

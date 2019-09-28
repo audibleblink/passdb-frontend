@@ -22,7 +22,7 @@
 </div>
 
 {#await apiGet(endpoint)}
-<Spinner />
+<Spinner type="line" />
 {:then results}
 <Results {results} />
 {:catch error}
