@@ -1,9 +1,11 @@
 <script>
 	export let params
+	export let resultSize
 	import { link, location } from "svelte-spa-router"
 
 	let strParams = (n) => `per_page=${n || params.per_page}`
 	let pageParams = (n) => `page=${n || params.page}`
+	let isLastPage = resultSize < params.per_page
 </script>
 
 <style>
@@ -13,7 +15,6 @@
 </style>
 
 <div class="row">
-
 	<div class="col s3 offset-s5">
 		<ul class="pagination">
 
@@ -34,7 +35,7 @@
 				<a href="null" onclick="return false"> {params.page} </a>
 			</li>
 
-			{#if params.page == undefined}
+			{#if isLastPage || params.page === undefined}
 			<li class="disabled">
 				<a href="null" onclick="return false"><i class="material-icons">chevron_right </i></a>
 			</li>

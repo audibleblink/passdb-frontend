@@ -30,7 +30,7 @@
 <style></style>
 
 { #if !$location.match("/email/")}
-	<Pager {params} />
+	<Pager {params} resultSize={results.length} />
 { /if }
 
 <table>
