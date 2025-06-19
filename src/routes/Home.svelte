@@ -1,27 +1,20 @@
-<style>
-	pre {
-		display: inline;
-	}
-</style>
+<script lang="ts">
+    import { onMount } from 'svelte';
+    import * as Card from '$lib/components/ui/card';
+    import TabbedSearch from '../components/TabbedSearch.svelte';
+    import { breadcrumbs } from '../stores/breadcrumbs';
 
-<div class="container">
-	<div class="row">
-		<h4>How to Search</h4>
-		<div class="card-panel">
-			<ul>
-				<li>
-					Username <span><pre>   u:$term</pre></span>
-				</li>
-				<li>
-					Password <span><pre>   p:$term</pre></span>
-				</li>
-				<li>
-					Domain <span><pre>   d:$term</pre></span>
-				</li>
-				<li>
-					Email <span><pre>   e:$term</pre></span>
-				</li>
-			</ul>
-		</div>
-	</div>
+    onMount(() => {
+        breadcrumbs.clearBreadcrumbs();
+    });
+</script>
+
+<div class="px-4 py-8">
+    <div class="max-w-2xl mx-auto">
+        <h1 class="text-3xl font-bold text-foreground mb-8">PassDB Search</h1>
+
+        <Card.Root class="p-6 border-0">
+            <TabbedSearch />
+        </Card.Root>
+    </div>
 </div>
