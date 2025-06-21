@@ -10,7 +10,6 @@ export interface BreadcrumbItem {
 }
 
 const STORAGE_KEY = 'passdb-breadcrumbs';
-const MAX_BREADCRUMBS = 6; // Including "Home"
 
 function createBreadcrumbStore() {
     // Initialize from localStorage or with Home
@@ -60,16 +59,7 @@ function createBreadcrumbStore() {
                 timestamp: Date.now()
             };
 
-            let updatedBreadcrumbs = [...breadcrumbs, newBreadcrumb];
-
-            // Keep only the most recent MAX_BREADCRUMBS items
-            if (updatedBreadcrumbs.length > MAX_BREADCRUMBS) {
-                // Always keep Home (index 0) and the most recent items
-                updatedBreadcrumbs = [
-                    updatedBreadcrumbs[0], // Home
-                    ...updatedBreadcrumbs.slice(-MAX_BREADCRUMBS + 1)
-                ];
-            }
+            const updatedBreadcrumbs = [...breadcrumbs, newBreadcrumb];
 
             persistBreadcrumbs(updatedBreadcrumbs);
             return updatedBreadcrumbs;
