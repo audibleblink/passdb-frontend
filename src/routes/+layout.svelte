@@ -11,8 +11,8 @@
     let error: Error | null = null;
 
     onMount(() => {
-        // Initialize keyboard shortcuts
-        // The service is already instantiated, just need to make sure it's active
+        // Initialize keyboard shortcuts in browser environment
+        keyboardShortcuts.init();
     });
 
     onDestroy(() => {

@@ -32,6 +32,7 @@ declare module '$env/static/private' {
 	export const SHLVL: string;
 	export const npm_config_noproxy: string;
 	export const HOME: string;
+	export const OLDPWD: string;
 	export const npm_package_json: string;
 	export const HOMEBREW_PREFIX: string;
 	export const npm_config_userconfig: string;
@@ -47,6 +48,7 @@ declare module '$env/static/private' {
 	export const HOMEBREW_CELLAR: string;
 	export const NODE: string;
 	export const npm_package_name: string;
+	export const OTEL_EXPORTER_OTLP_ENDPOINT: string;
 	export const npm_lifecycle_script: string;
 	export const AUGMENT_AGENT_WORKSPACE_IMAGE: string;
 	export const npm_package_version: string;
@@ -98,6 +100,7 @@ declare module '$env/dynamic/private' {
 		SHLVL: string;
 		npm_config_noproxy: string;
 		HOME: string;
+		OLDPWD: string;
 		npm_package_json: string;
 		HOMEBREW_PREFIX: string;
 		npm_config_userconfig: string;
@@ -113,6 +116,7 @@ declare module '$env/dynamic/private' {
 		HOMEBREW_CELLAR: string;
 		NODE: string;
 		npm_package_name: string;
+		OTEL_EXPORTER_OTLP_ENDPOINT: string;
 		npm_lifecycle_script: string;
 		AUGMENT_AGENT_WORKSPACE_IMAGE: string;
 		npm_package_version: string;

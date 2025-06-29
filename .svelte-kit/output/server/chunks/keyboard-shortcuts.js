@@ -619,22 +619,26 @@ const THEME_CLASSES = THEME_CLASSES$1;
 const themeCache = /* @__PURE__ */ new Map();
 themes$1.forEach((theme2) => themeCache.set(theme2.value, theme2));
 function createThemeStore() {
-  const rawStoredTheme = localStorage.getItem("theme");
+  const isBrowser = typeof window !== "undefined";
+  const rawStoredTheme = isBrowser ? localStorage.getItem("theme") : null;
   const validThemes = themes$1.map((t) => t.value);
   const storedTheme = rawStoredTheme && validThemes.includes(rawStoredTheme) ? rawStoredTheme : "system";
-  if (rawStoredTheme && rawStoredTheme !== storedTheme) {
+  if (isBrowser && rawStoredTheme && rawStoredTheme !== storedTheme) {
     localStorage.setItem("theme", storedTheme);
   }
   const { subscribe, set } = writable(storedTheme);
   return {
     subscribe,
     setTheme: async (theme2) => {
-      localStorage.setItem("theme", theme2);
+      if (isBrowser) {
+        localStorage.setItem("theme", theme2);
+      }
       set(theme2);
-      const currentDarkMode = localStorage.getItem("darkMode") === "true";
+      const currentDarkMode = isBrowser ? localStorage.getItem("darkMode") === "true" : false;
       await applyTheme(theme2, currentDarkMode);
     },
     init: async () => {
+      if (!isBrowser) return;
       const currentDarkMode = localStorage.getItem("darkMode") === "true";
       await applyTheme(storedTheme, currentDarkMode);
       const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
@@ -649,11 +653,13 @@ function createThemeStore() {
   };
 }
 function createDarkModeStore() {
-  const storedDarkMode = localStorage.getItem("darkMode") === "true";
+  const isBrowser = typeof window !== "undefined";
+  const storedDarkMode = isBrowser ? localStorage.getItem("darkMode") === "true" : false;
   const store = writable(storedDarkMode);
   return {
     subscribe: store.subscribe,
     toggle: async () => {
+      if (!isBrowser) return;
       const currentValue = localStorage.getItem("darkMode") === "true";
       const newValue = !currentValue;
       localStorage.setItem("darkMode", String(newValue));
@@ -662,6 +668,7 @@ function createDarkModeStore() {
       await applyTheme(currentTheme || "system", newValue);
     },
     set: async (value) => {
+      if (!isBrowser) return;
       localStorage.setItem("darkMode", String(value));
       store.set(value);
       const currentTheme = localStorage.getItem("theme");
