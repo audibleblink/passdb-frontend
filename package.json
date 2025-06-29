@@ -3,10 +3,11 @@
   "version": "2.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite dev",
     "build": "vite build",
     "preview": "vite preview",
-    "check": "svelte-check --tsconfig ./tsconfig.json",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "lint": "eslint . --ext .js,.ts,.svelte",
     "format": "prettier --write .",
     "test": "vitest",
@@ -42,13 +43,13 @@
     "vitest": "^3.2.0"
   },
   "dependencies": {
+    "@sveltejs/adapter-static": "^3.0.8",
+    "@sveltejs/kit": "^2.22.0",
     "@tanstack/table-core": "^8.21.3",
     "@types/mousetrap": "^1.6.15",
-    "@types/page": "^1.11.9",
     "clsx": "^2.1.1",
     "lucide-svelte": "^0.517.0",
     "mousetrap": "^1.6.5",
-    "page": "^1.11.6",
     "shadcn-svelte": "^1.0.3",
     "tailwind-merge": "^3.3.1"
   }

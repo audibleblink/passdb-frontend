@@ -1,12 +1,12 @@
 <script lang="ts">
     import { breadcrumbs } from '../stores/breadcrumbs';
-    import { navigate } from '../router';
+    import { goto } from '$app/navigation';
     import * as Breadcrumb from '$lib/components/ui/breadcrumb';
     import { ChevronRight } from 'lucide-svelte';
 
     function handleBreadcrumbClick(index: number, path: string) {
         breadcrumbs.navigateToBreadcrumb(index);
-        navigate(path);
+        goto(path);
     }
 
     // Reactive statement to determine which breadcrumbs to show

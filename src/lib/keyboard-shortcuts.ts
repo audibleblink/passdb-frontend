@@ -1,5 +1,5 @@
 import Mousetrap from 'mousetrap';
-import { navigate } from '../router';
+import { goto } from '$app/navigation';
 import { theme, themes, isDarkMode } from '../stores/theme';
 import { breadcrumbs } from '../stores/breadcrumbs';
 import { get } from 'svelte/store';
@@ -26,7 +26,10 @@ export class KeyboardShortcutManager {
   private onHideHelp?: () => void;
 
   constructor() {
-    this.setupGlobalShortcuts();
+    // Only setup shortcuts in browser environment
+    if (typeof window !== 'undefined') {
+      this.setupGlobalShortcuts();
+    }
   }
 
   private setupGlobalShortcuts() {
@@ -41,7 +44,7 @@ export class KeyboardShortcutManager {
     }, 'global');
 
     this.bind('g h', 'Go to home page', () => {
-      navigate('/');
+      goto('/');
     }, 'global');
 
     this.bind('ctrl+o', 'Navigate back through breadcrumbs', () => {
@@ -112,12 +115,15 @@ export class KeyboardShortcutManager {
   private bind(key: string, description: string, action: () => void, context: ShortcutContext = 'global') {
     const shortcut: KeyboardShortcut = { key, description, action, context };
     this.shortcuts.set(key, shortcut);
-    
-    Mousetrap.bind(key, (e) => {
-      e.preventDefault();
-      action();
-      return false;
-    });
+
+    // Only bind if we're in the browser environment
+    if (typeof window !== 'undefined' && Mousetrap) {
+      Mousetrap.bind(key, (e) => {
+        e.preventDefault();
+        action();
+        return false;
+      });
+    }
   }
 
   private unbind(key: string) {
@@ -381,11 +387,20 @@ export class KeyboardShortcutManager {
     return groups.filter(group => group.shortcuts.length > 0);
   }
 
+  // Initialize shortcuts when in browser (called from components)
+  init() {
+    if (typeof window !== 'undefined' && this.shortcuts.size === 0) {
+      this.setupGlobalShortcuts();
+    }
+  }
+
   destroy() {
-    // Unbind all shortcuts
-    this.shortcuts.forEach((_, key) => {
-      Mousetrap.unbind(key);
-    });
+    // Only unbind if we're in the browser and Mousetrap is available
+    if (typeof window !== 'undefined' && Mousetrap) {
+      this.shortcuts.forEach((_, key) => {
+        Mousetrap.unbind(key);
+      });
+    }
     this.shortcuts.clear();
   }
 }

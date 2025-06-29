@@ -2,25 +2,51 @@
     import type { BreachInfo } from '../types/api';
     import LoadingStates from './LoadingStates.svelte';
     import { sanitizeHtml } from '../lib/sanitize';
+    import { useAPI } from '../composables/useFetch.svelte';
 
     export let email: string;
 
-    let apiServer = localStorage.getItem('host');
-
-    async function fetchBreaches(email: string): Promise<BreachInfo[]> {
-        const res = await fetch(`${apiServer}/breaches/${email}`);
-        if (!res.ok) {
-            throw new Error(`HTTP error! status: ${res.status}`);
-        }
-        return await res.json();
-    }
+    // Use modern fetch composable for breach data
+    const { data: results, loading, error, isSuccess } = useAPI<BreachInfo[]>(`/breaches/${email}`);
 </script>
 
-{#await fetchBreaches(email)}
+{#if loading}
     <div class="max-w-4xl mx-auto mt-8">
         <LoadingStates type="spinner" message="Checking breach databases..." />
     </div>
-{:then results}
+{:else if error}
+    <div class="max-w-4xl mx-auto">
+        <div
+            class="mt-8 bg-accent/10 border border-accent/30 rounded-lg p-4"
+        >
+        <div class="flex">
+            <div class="flex-shrink-0">
+                <svg
+                    class="h-5 w-5 text-amber-600 dark:text-amber-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                    />
+                </svg>
+            </div>
+            <div class="ml-3">
+                <h3 class="text-sm font-medium text-accent-foreground">
+                    Unable to check breaches
+                </h3>
+                <p class="mt-1 text-sm text-accent-foreground">
+                    {error.message}
+                </p>
+            </div>
+        </div>
+    </div>
+    </div>
+{:else if isSuccess && results}
     {#if results.length > 0}
         <div class="max-w-4xl mx-auto mt-8 bg-card rounded-lg shadow-md">
             <div class="px-6 py-4 border-b border-border">
@@ -125,36 +151,4 @@
             </p>
         </div>
     {/if}
-{:catch error}
-    <div class="max-w-4xl mx-auto">
-        <div
-            class="mt-8 bg-accent/10 border border-accent/30 rounded-lg p-4"
-        >
-        <div class="flex">
-            <div class="flex-shrink-0">
-                <svg
-                    class="h-5 w-5 text-amber-600 dark:text-amber-400"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-                    />
-                </svg>
-            </div>
-            <div class="ml-3">
-                <h3 class="text-sm font-medium text-accent-foreground">
-                    Unable to check breaches
-                </h3>
-                <p class="mt-1 text-sm text-accent-foreground">
-                    {error.message}
-                </p>
-            </div>
-        </div>
-    </div>
-    </div>
-{/await}
+{/if}

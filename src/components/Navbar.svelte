@@ -1,9 +1,10 @@
 <script lang="ts">
     import { onMount } from 'svelte';
     import { writable } from 'svelte/store';
+    import { goto } from '$app/navigation';
+    import { page } from '$app/stores';
     import ThemeSwitcher from './ThemeSwitcher.svelte';
     import { theme } from '../stores/theme';
-    import { navigate, currentRoute } from '../router';
     import * as HoverCard from '$lib/components/ui/hover-card';
     import * as Popover from '$lib/components/ui/popover';
     import { Badge } from '$lib/components/ui/badge';
@@ -11,9 +12,16 @@
     import { Label } from '$lib/components/ui/label';
     import { Separator } from '$lib/components/ui/separator';
 
-    let searchValue = '';
-    const host = writable(localStorage.getItem('host') || 'http://127.0.0.1:3000');
-    host.subscribe((val) => localStorage.setItem('host', val));
+    let searchValue = $state('');
+
+    // Modern reactive host management with runes
+    let hostValue = $state(typeof window !== 'undefined' ? localStorage.getItem('host') || 'http://127.0.0.1:3000' : 'http://127.0.0.1:3000');
+
+    $effect(() => {
+        if (typeof window !== 'undefined') {
+            localStorage.setItem('host', hostValue);
+        }
+    });
 
     onMount(() => {
         theme.init();
@@ -24,7 +32,7 @@
             const query = searchValue;
 
             if (!query) {
-                navigate('/rtfm');
+                goto('/');
                 return;
             }
 
@@ -33,19 +41,19 @@
 
             switch (type) {
                 case 'u':
-                    navigate(`/username/${rest}`);
+                    goto(`/username/${encodeURIComponent(rest)}`);
                     break;
                 case 'p':
-                    navigate(`/password/${rest}`);
+                    goto(`/password/${encodeURIComponent(rest)}`);
                     break;
                 case 'd':
-                    navigate(`/domain/${rest}`);
+                    goto(`/domain/${encodeURIComponent(rest)}`);
                     break;
                 case 'e':
-                    navigate(`/email/${rest}`);
+                    goto(`/email/${encodeURIComponent(rest)}`);
                     break;
                 default:
-                    navigate('/rtfm');
+                    goto('/');
             }
         }
     }
@@ -57,7 +65,7 @@
             <!-- Logo -->
             <div class="flex items-center">
                 <button
-                    on:click={() => navigate('/')}
+                    onclick={() => goto('/')}
                     class="text-primary-foreground text-xl font-semibold hover:text-secondary-foreground transition-colors"
                 >
                     PassDB Search
@@ -71,11 +79,11 @@
             <!-- Search and Settings -->
             <div class="flex items-center space-x-4">
                 <!-- Search Input - hidden on root route -->
-                {#if $currentRoute !== '/' && !$currentRoute.startsWith('/?')}
+                {#if $page.route.id !== '/'}
                     <div class="relative">
                         <input
                             bind:value={searchValue}
-                            on:keydown={handleSearch}
+                            onkeydown={handleSearch}
                             type="text"
                             placeholder="Search "
                             class="flex h-10 w-64 rounded-md border border-input bg-background pl-3 pr-10 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
@@ -174,7 +182,7 @@
                                     <Label for="api-host">API Host</Label>
                                     <Input
                                         id="api-host"
-                                        bind:value={$host}
+                                        bind:value={hostValue}
                                         placeholder="http://127.0.0.1:3000"
                                         class="col-span-2 h-8 focus-visible:ring-0 focus-visible:ring-offset-0"
                                     />

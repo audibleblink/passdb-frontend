@@ -1,15 +1,15 @@
 <script lang="ts">
-    import { navigate } from '../router';
+    import { goto } from '$app/navigation';
     import * as Tabs from '$lib/components/ui/tabs';
 
-    let activeTab = 'smart';
-    let searchValues = {
+    let activeTab = $state('smart');
+    let searchValues = $state({
         smart: '',
         username: '',
         password: '',
         domain: '',
         email: '',
-    };
+    });
 
     type SearchType = keyof typeof searchValues;
 
@@ -21,24 +21,24 @@
             case 'smart':
                 // Auto-detect search type
                 if (value.includes('@')) {
-                    navigate(`/email/${value}`);
+                    goto(`/email/${encodeURIComponent(value)}`);
                 } else if (value.includes('.') && !value.includes(' ')) {
-                    navigate(`/domain/${value}`);
+                    goto(`/domain/${encodeURIComponent(value)}`);
                 } else {
-                    navigate(`/username/${value}`);
+                    goto(`/username/${encodeURIComponent(value)}`);
                 }
                 break;
             case 'username':
-                navigate(`/username/${value}`);
+                goto(`/username/${encodeURIComponent(value)}`);
                 break;
             case 'password':
-                navigate(`/password/${value}`);
+                goto(`/password/${encodeURIComponent(value)}`);
                 break;
             case 'domain':
-                navigate(`/domain/${value}`);
+                goto(`/domain/${encodeURIComponent(value)}`);
                 break;
             case 'email':
-                navigate(`/email/${value}`);
+                goto(`/email/${encodeURIComponent(value)}`);
                 break;
         }
     }
@@ -67,11 +67,10 @@
         <div class="relative">
             <input
                 bind:value={searchValues.smart}
-                on:keydown={(e) => handleKeydown(e, 'smart')}
+                onkeydown={(e) => handleKeydown(e, 'smart')}
                 type="text"
                 placeholder="Enter username, email, or domain"
                 class="flex h-12 w-full rounded-md border border-input bg-background px-4 py-3 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                autofocus
             />
             <div class="absolute inset-y-0 right-0 flex items-center pr-3">
                 <svg
@@ -98,7 +97,7 @@
         <div class="relative">
             <input
                 bind:value={searchValues.username}
-                on:keydown={(e) => handleKeydown(e, 'username')}
+                onkeydown={(e) => handleKeydown(e, 'username')}
                 type="text"
                 placeholder="Enter username (e.g., john_doe)"
                 class="flex h-12 w-full rounded-md border border-input bg-background px-4 py-3 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
@@ -126,7 +125,7 @@
         <div class="relative">
             <input
                 bind:value={searchValues.password}
-                on:keydown={(e) => handleKeydown(e, 'password')}
+                onkeydown={(e) => handleKeydown(e, 'password')}
                 type="password"
                 placeholder="Enter password to check"
                 class="flex h-12 w-full rounded-md border border-input bg-background px-4 py-3 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
@@ -159,7 +158,7 @@
         <div class="relative">
             <input
                 bind:value={searchValues.domain}
-                on:keydown={(e) => handleKeydown(e, 'domain')}
+                onkeydown={(e) => handleKeydown(e, 'domain')}
                 type="text"
                 placeholder="Enter domain (e.g., example.com)"
                 class="flex h-12 w-full rounded-md border border-input bg-background px-4 py-3 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
@@ -189,7 +188,7 @@
         <div class="relative">
             <input
                 bind:value={searchValues.email}
-                on:keydown={(e) => handleKeydown(e, 'email')}
+                onkeydown={(e) => handleKeydown(e, 'email')}
                 type="email"
                 placeholder="Enter email address"
                 class="flex h-12 w-full rounded-md border border-input bg-background px-4 py-3 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
