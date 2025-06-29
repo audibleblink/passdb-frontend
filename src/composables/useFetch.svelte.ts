@@ -105,11 +105,12 @@ export function useFetch<T>(
 
 // Specialized hooks for common patterns
 export function useAPI<T>(endpoint: string, options?: FetchOptions) {
-  const baseUrl = typeof window !== 'undefined' 
-    ? (window as any).__API_BASE_URL__ || 'http://localhost:4567'
+  // Reactive base URL that updates when localStorage changes
+  const getBaseUrl = () => typeof window !== 'undefined'
+    ? localStorage.getItem('host') || 'http://localhost:4567'
     : 'http://localhost:4567';
-    
-  return useFetch<T>(`${baseUrl}${endpoint}`, options);
+
+  return useFetch<T>(() => `${getBaseUrl()}${endpoint}`, options);
 }
 
 export function useSearch<T>(

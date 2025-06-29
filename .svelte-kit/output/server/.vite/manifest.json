@@ -1,0 +1,176 @@
+{
+  ".svelte-kit/generated/server/internal.js": {
+    "file": "internal.js",
+    "name": "internal",
+    "src": ".svelte-kit/generated/server/internal.js",
+    "isEntry": true,
+    "imports": [
+      "_internal.js"
+    ]
+  },
+  "_SearchResultLayout.js": {
+    "file": "chunks/SearchResultLayout.js",
+    "name": "SearchResultLayout",
+    "imports": [
+      "_index.js",
+      "_breadcrumbs.js",
+      "_keyboard-shortcuts.js",
+      "_exports.js",
+      "_client.js"
+    ]
+  },
+  "_breadcrumbs.js": {
+    "file": "chunks/breadcrumbs.js",
+    "name": "breadcrumbs",
+    "imports": [
+      "_exports.js",
+      "_client.js",
+      "_index.js"
+    ]
+  },
+  "_client.js": {
+    "file": "chunks/client.js",
+    "name": "client",
+    "imports": [
+      "_exports.js",
+      "_index.js"
+    ]
+  },
+  "_events.js": {
+    "file": "chunks/events.js",
+    "name": "events",
+    "imports": [
+      "_index.js"
+    ]
+  },
+  "_exports.js": {
+    "file": "chunks/exports.js",
+    "name": "exports",
+    "imports": [
+      "_index.js"
+    ]
+  },
+  "_index.js": {
+    "file": "chunks/index.js",
+    "name": "index"
+  },
+  "_internal.js": {
+    "file": "chunks/internal.js",
+    "name": "internal",
+    "imports": [
+      "_index.js",
+      "_events.js"
+    ]
+  },
+  "_keyboard-shortcuts.js": {
+    "file": "chunks/keyboard-shortcuts.js",
+    "name": "keyboard-shortcuts",
+    "imports": [
+      "_index.js",
+      "_breadcrumbs.js",
+      "_client.js",
+      "_exports.js"
+    ]
+  },
+  "_noop.js": {
+    "file": "chunks/noop.js",
+    "name": "noop",
+    "imports": [
+      "_index.js"
+    ]
+  },
+  "node_modules/@sveltejs/kit/src/runtime/components/svelte-5/error.svelte": {
+    "file": "entries/fallbacks/error.svelte.js",
+    "name": "entries/fallbacks/error.svelte",
+    "src": "node_modules/@sveltejs/kit/src/runtime/components/svelte-5/error.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index.js",
+      "_client.js"
+    ]
+  },
+  "node_modules/@sveltejs/kit/src/runtime/server/index.js": {
+    "file": "index.js",
+    "name": "index",
+    "src": "node_modules/@sveltejs/kit/src/runtime/server/index.js",
+    "isEntry": true,
+    "imports": [
+      "_index.js",
+      "_internal.js",
+      "_exports.js"
+    ]
+  },
+  "src/routes/+layout.svelte": {
+    "file": "entries/pages/_layout.svelte.js",
+    "name": "entries/pages/_layout.svelte",
+    "src": "src/routes/+layout.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index.js",
+      "_keyboard-shortcuts.js",
+      "_client.js",
+      "_breadcrumbs.js",
+      "_noop.js",
+      "_events.js"
+    ],
+    "css": [
+      "_app/immutable/assets/_layout.CoPY42nB.css"
+    ]
+  },
+  "src/routes/+page.svelte": {
+    "file": "entries/pages/_page.svelte.js",
+    "name": "entries/pages/_page.svelte",
+    "src": "src/routes/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index.js",
+      "_breadcrumbs.js",
+      "_client.js",
+      "_noop.js"
+    ]
+  },
+  "src/routes/domain/[domain]/+page.svelte": {
+    "file": "entries/pages/domain/_domain_/_page.svelte.js",
+    "name": "entries/pages/domain/_domain_/_page.svelte",
+    "src": "src/routes/domain/[domain]/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index.js",
+      "_breadcrumbs.js",
+      "_SearchResultLayout.js"
+    ]
+  },
+  "src/routes/email/[email]/+page.svelte": {
+    "file": "entries/pages/email/_email_/_page.svelte.js",
+    "name": "entries/pages/email/_email_/_page.svelte",
+    "src": "src/routes/email/[email]/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index.js",
+      "_breadcrumbs.js",
+      "_SearchResultLayout.js"
+    ]
+  },
+  "src/routes/password/[password]/+page.svelte": {
+    "file": "entries/pages/password/_password_/_page.svelte.js",
+    "name": "entries/pages/password/_password_/_page.svelte",
+    "src": "src/routes/password/[password]/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index.js",
+      "_breadcrumbs.js",
+      "_SearchResultLayout.js"
+    ]
+  },
+  "src/routes/username/[name]/+page.svelte": {
+    "file": "entries/pages/username/_name_/_page.svelte.js",
+    "name": "entries/pages/username/_name_/_page.svelte",
+    "src": "src/routes/username/[name]/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index.js",
+      "_breadcrumbs.js",
+      "_SearchResultLayout.js"
+    ]
+  }
+}

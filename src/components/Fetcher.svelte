@@ -2,86 +2,18 @@
     import type { SearchResult } from '../types/api';
     import Results from './Results.svelte';
     import LoadingStates from './LoadingStates.svelte';
+    import { useAPI } from '../composables/useFetch.svelte';
 
     export let endpoint: string;
 
-    let apiServer = localStorage.getItem('host') || 'http://localhost:4567';
-    let retryCount = 0;
-    const maxRetries = 3;
-
-    async function apiGet(q: string): Promise<SearchResult[]> {
-        try {
-            const res = await fetch(`${apiServer}${q}`);
-
-            if (!res.ok) {
-                let errorMessage = `HTTP ${res.status}`;
-
-                // Try to get more specific error information
-                try {
-                    const errorData = await res.text();
-                    if (errorData) {
-                        errorMessage += `: ${errorData}`;
-                    } else {
-                        errorMessage += ` - ${res.statusText}`;
-                    }
-                } catch {
-                    errorMessage += ` - ${res.statusText}`;
-                }
-
-                throw new Error(errorMessage);
-            }
-
-            const data = await res.json();
-            retryCount = 0; // Reset retry count on success
-            return data;
-        } catch (error) {
-            if (retryCount < maxRetries) {
-                retryCount++;
-                // Exponential backoff
-                await new Promise((resolve) => setTimeout(resolve, 1000 * Math.pow(2, retryCount)));
-                return apiGet(q);
-            }
-
-            // Enhanced error information
-            if (error instanceof Error) {
-                throw error;
-            } else {
-                throw new Error(`Network error: ${String(error)}`);
-            }
-        }
-    }
+    // Use the modern fetch composable with automatic retry and error handling
+    const { data: results, loading, error, isSuccess } = useAPI<SearchResult[]>(endpoint);
 </script>
 
 <div class="px-4 py-8">
-    {#await apiGet(endpoint)}
+    {#if loading}
         <LoadingStates type="spinner" message="Searching database..." />
-    {:then results}
-        {#if results.length === 0}
-            <div class="max-w-4xl mx-auto">
-                <div class="text-center py-12">
-                    <svg
-                        class="mx-auto h-12 w-12 text-muted-foreground"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                    >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                        />
-                    </svg>
-                    <h3 class="mt-2 text-sm font-medium text-foreground">No results found</h3>
-                    <p class="mt-1 text-sm text-muted-foreground">
-                        Try adjusting your search terms
-                    </p>
-                </div>
-            </div>
-        {:else}
-            <Results {results} />
-        {/if}
-    {:catch error}
+    {:else if error}
         <div class="max-w-4xl mx-auto">
             <div class="bg-destructive/10 border border-destructive/30 rounded-lg p-6">
                 <div class="flex">
@@ -114,5 +46,31 @@
                 </div>
             </div>
         </div>
-    {/await}
+    {:else if isSuccess && results}
+        {#if results.length === 0}
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center py-12">
+                    <svg
+                        class="mx-auto h-12 w-12 text-muted-foreground"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                    </svg>
+                    <h3 class="mt-2 text-sm font-medium text-foreground">No results found</h3>
+                    <p class="mt-1 text-sm text-muted-foreground">
+                        Try adjusting your search terms
+                    </p>
+                </div>
+            </div>
+        {:else}
+            <Results results={results} />
+        {/if}
+    {/if}
 </div>

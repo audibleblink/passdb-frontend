@@ -1,7 +1,8 @@
 import { writable } from 'svelte/store';
 import { get } from 'svelte/store';
+import { goto } from '$app/navigation';
+import { page } from '$app/stores';
 import { navigation } from './navigation';
-import { currentRoute, navigate } from '../router';
 
 export interface BreadcrumbItem {
     label: string;
@@ -91,7 +92,7 @@ function createBreadcrumbStore() {
             });
             
             // Navigate to the previous breadcrumb
-            navigate(previousBreadcrumb.path);
+            goto(previousBreadcrumb.path);
         }
     }
 
@@ -111,7 +112,8 @@ function createBreadcrumbStore() {
 
     // Auto-add breadcrumbs based on current location
     function addFromLocation(customLabel?: string) {
-        const currentLocation = get(currentRoute);
+        const currentPage = get(page);
+        const currentLocation = currentPage.url.pathname;
         if (!currentLocation) return;
 
         let label = customLabel;

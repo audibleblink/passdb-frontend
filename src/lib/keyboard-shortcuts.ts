@@ -1,5 +1,5 @@
 import Mousetrap from 'mousetrap';
-import { navigate } from '../router';
+import { goto } from '$app/navigation';
 import { theme, themes, isDarkMode } from '../stores/theme';
 import { breadcrumbs } from '../stores/breadcrumbs';
 import { get } from 'svelte/store';
@@ -41,7 +41,7 @@ export class KeyboardShortcutManager {
     }, 'global');
 
     this.bind('g h', 'Go to home page', () => {
-      navigate('/');
+      goto('/');
     }, 'global');
 
     this.bind('ctrl+o', 'Navigate back through breadcrumbs', () => {

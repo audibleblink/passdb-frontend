@@ -1,5 +1,6 @@
 <script lang="ts">
-    import { currentRoute, navigate } from '../../router';
+    import { goto } from '$app/navigation';
+    import { page } from '$app/stores';
     import { breadcrumbs } from '../../stores/breadcrumbs';
     
     type Props = {
@@ -14,13 +15,13 @@
 
     function handleLinkClick(path: string, label: string) {
         breadcrumbs.addBreadcrumb(label, path);
-        navigate(path);
+        goto(path);
     }
 </script>
 
 {#if type === 'username'}
     <div class="flex items-center gap-2">
-        {#if showEmailLink && !$currentRoute.match('/email/') && username && username !== '-' && domain && domain !== '-'}
+        {#if showEmailLink && !$page.route.id?.includes('/email/') && username && username !== '-' && domain && domain !== '-'}
             <button 
                 class="text-muted-foreground hover:text-secondary-foreground transition-colors"
                 title="View email breach info"
@@ -31,7 +32,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
             </button>
-        {:else if showEmailLink && !$currentRoute.match('/email/')}
+        {:else if showEmailLink && !$page.route.id?.includes('/email/')}
             <div class="w-4 h-4"></div>
         {/if}
         {#if username && username !== '-'}
