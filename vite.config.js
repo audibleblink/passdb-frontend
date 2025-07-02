@@ -9,6 +9,9 @@ export default defineConfig({
             preprocess: vitePreprocess(),
         }),
     ],
+    define: {
+        __DEFAULT_API_HOST__: JSON.stringify(process.env.VITE_DEFAULT_API_HOST || 'http://127.0.0.1:3000'),
+    },
     server: {
         port: 5000,
         host: true,
@@ -17,15 +20,16 @@ export default defineConfig({
         target: 'es2022',
         outDir: 'docs',
         emptyOutDir: true,
-        cssCodeSplit: true,
+        cssCodeSplit: false,
+        sourcemap: true,
         rollupOptions: {
             output: {
                 manualChunks: {
-                    'vendor': ['svelte', 'page'],
-                    'ui-core': ['bits-ui', 'clsx', 'tailwind-merge', 'lucide-svelte'],
-                    'ui-table': ['@tanstack/table-core'],
-                    'utils': ['mousetrap']
-                }
+                    'vendor': ['svelte', 'page', 'bits-ui', 'clsx', 'tailwind-merge', 'lucide-svelte', '@tanstack/table-core', 'mousetrap']
+                },
+                chunkFileNames: 'assets/[name]-[hash].js',
+                entryFileNames: 'assets/[name]-[hash].js',
+                assetFileNames: 'assets/[name]-[hash].[ext]'
             }
         }
     },

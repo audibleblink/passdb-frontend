@@ -2,5 +2,6 @@
 node_modules
 
 # Build artifacts
-docs/assets/*.js
-docs/assets/*.css
+docs/**/*.js
+docs/**/*.css
+docs/**/*.map

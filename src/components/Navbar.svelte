@@ -12,7 +12,7 @@
     import { Separator } from '$lib/components/ui/separator';
 
     let searchValue = '';
-    const host = writable(localStorage.getItem('host') || 'http://127.0.0.1:3000');
+    const host = writable(localStorage.getItem('host') || __DEFAULT_API_HOST__);
     host.subscribe((val) => localStorage.setItem('host', val));
 
     onMount(() => {
@@ -175,7 +175,7 @@
                                     <Input
                                         id="api-host"
                                         bind:value={$host}
-                                        placeholder="http://127.0.0.1:3000"
+                                        placeholder={__DEFAULT_API_HOST__}
                                         class="col-span-2 h-8 focus-visible:ring-0 focus-visible:ring-offset-0"
                                     />
                                 </div>
