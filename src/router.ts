@@ -10,6 +10,14 @@ let currentComponent: any = null;
 export const component = writable<any>(null);
 
 export function setupRouter() {
+    // Configure base path for GitHub Pages deployment
+    if (window.location.hostname.includes('github.io')) {
+        const pathSegments = window.location.pathname.split('/').filter(Boolean);
+        if (pathSegments.length > 0 && !pathSegments[0].includes('.')) {
+            router.base(`/${pathSegments[0]}`);
+        }
+    }
+
     router('/', () => {
         currentRoute.set('/');
         routeParams.set({});

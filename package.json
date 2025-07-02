@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && cp docs/index.html docs/404.html",
     "build:analyze": "vite build && npx vite-bundle-analyzer docs",
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
