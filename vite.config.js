@@ -33,7 +33,7 @@ export default defineConfig({
             }
         }
     },
-    base: './',
+    base: '/',
     resolve: {
         alias: {
             $lib: path.resolve('./src/lib'),
