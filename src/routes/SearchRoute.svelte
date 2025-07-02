@@ -3,6 +3,7 @@
     import HIBP from '../components/HIBP.svelte';
     import { currentRoute } from '../router';
     import type { RouteParams } from '../types/api';
+    import Separator from '$lib/components/ui/separator/separator.svelte';
 
     export let params: RouteParams = {};
 
@@ -11,36 +12,36 @@
     }
 
     $: searchType = $currentRoute.split('/')[1] as keyof typeof routeConfig;
-    
+
     const routeConfig = {
-        email: { 
-            apiPath: 'emails', 
-            paramKey: 'email', 
-            label: 'Email', 
+        email: {
+            apiPath: 'emails',
+            paramKey: 'email',
+            label: 'Email',
             hasHIBP: true,
-            formatter: undefined
+            formatter: undefined,
         },
-        domain: { 
-            apiPath: 'domains', 
-            paramKey: 'domain', 
+        domain: {
+            apiPath: 'domains',
+            paramKey: 'domain',
             label: 'Domain',
             hasHIBP: false,
-            formatter: undefined
+            formatter: undefined,
         },
-        password: { 
-            apiPath: 'passwords', 
-            paramKey: 'password', 
-            label: 'Password', 
+        password: {
+            apiPath: 'passwords',
+            paramKey: 'password',
+            label: 'Password',
             hasHIBP: false,
-            formatter: formatPassword 
+            formatter: formatPassword,
         },
-        username: { 
-            apiPath: 'usernames', 
-            paramKey: 'name', 
+        username: {
+            apiPath: 'usernames',
+            paramKey: 'name',
             label: 'Username',
             hasHIBP: false,
-            formatter: undefined
-        }
+            formatter: undefined,
+        },
     } as const;
 
     $: config = routeConfig[searchType];
@@ -48,10 +49,10 @@
 </script>
 
 {#if config}
-    <SearchResultLayout 
-        {params} 
-        apiPath={config.apiPath} 
-        paramKey={config.paramKey} 
+    <SearchResultLayout
+        {params}
+        apiPath={config.apiPath}
+        paramKey={config.paramKey}
         breadcrumbLabel={config.label}
         formatBreadcrumb={config.formatter || ((v) => v)}
     >
@@ -60,3 +61,4 @@
         {/if}
     </SearchResultLayout>
 {/if}
+
